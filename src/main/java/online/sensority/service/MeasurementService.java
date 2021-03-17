@@ -17,12 +17,12 @@ import java.util.Random;
 public class MeasurementService {
 
     private final MeasurementMongoRepository measurementMongoRepository;
-    private final RabbitMQService rabbitMQService;
+//    private final RabbitMQService rabbitMQService;
     private final ApplicationEventPublisher publisher;
 
-    public MeasurementService(MeasurementMongoRepository measurementMongoRepository, RabbitMQService rabbitMQService, ApplicationEventPublisher publisher) {
+    public MeasurementService(MeasurementMongoRepository measurementMongoRepository, ApplicationEventPublisher publisher) {
         this.measurementMongoRepository = measurementMongoRepository;
-        this.rabbitMQService = rabbitMQService;
+//        this.rabbitMQService = rabbitMQService;
         this.publisher = publisher;
     }
 
@@ -32,7 +32,7 @@ public class MeasurementService {
             int idx = new Random().nextInt(theatres.length);
             String random = (theatres[idx]);
             MeasurementEvent measurementEvent =  new MeasurementEvent(id, random, new Date());
-            publishEvent(measurementEvent);
+//            publishEvent(measurementEvent);
             movieEventSynchronousSink.next(measurementEvent);
         }).delayElements(Duration.ofSeconds(5));
     }
@@ -45,9 +45,9 @@ public class MeasurementService {
         return measurementMongoRepository.findAll();
     }
 
-    private void publishEvent(MeasurementEvent measurementEvent) {
-        rabbitMQService.sendMessage(measurementEvent);
-    }
+//    private void publishEvent(MeasurementEvent measurementEvent) {
+//        rabbitMQService.sendMessage(measurementEvent);
+//    }
 
     public Mono<Measurement> update(String id, String title) {
         return measurementMongoRepository
