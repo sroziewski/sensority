@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: prod
+  rabbitmq:
+    host: 144.91.75.39
+    username: simon
+    password: 1qaz@WSX
+    port: 5672
+  template:
+    retry:
+      enabled: true
+      initial-interval: 2s
+
+destinations:
+  queues:
+    test:
+      exchange: test
+      routing-key: test
+
+test:
+  event:
+    queue: test-queue-name
+
+log4j:
+  category:
+    org:
+      springframework:
+        data:
+          mongodb: DEBUG
+  appender:
+    stdout:
+      layout: ConversionPattern=%d{ABSOLUTE} %5p %40.40c:%4L - %m%n

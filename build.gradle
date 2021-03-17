@@ -25,6 +25,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.session:spring-session-core'
+    implementation 'org.projectlombok:lombok:1.18.16'
+	implementation 'org.projectlombok:lombok:1.18.16'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -32,6 +34,9 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+//	testCompile "org.testcontainers:testcontainers:1.15.2"
+//	testCompile "org.testcontainers:junit-jupiter:1.15.2"
+//	testCompile "org.testcontainers:rabbitmq:1.15.2"
 }
 
 test {

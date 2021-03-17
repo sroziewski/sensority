@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      database: sensority
+      host: 144.91.75.39
+      password: 2wsx!QAZ
+      port: 27018
