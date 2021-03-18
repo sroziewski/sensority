@@ -1,15 +1,20 @@
 package online.sensority.rabbitmq.listener;
 
-import lombok.extern.slf4j.Slf4j;
 import online.sensority.model.MeasurementMessage;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Component
+@Profile({"test"})
 public class MeasurementEventListener {
 
+    MeasurementMessage measurementMessage;
+
     public void receiveMessage(MeasurementMessage message) {
-        log.info("Received <" + message + ">");
-        log.info("Message processed...");
+        measurementMessage = message;
+    }
+
+    public MeasurementMessage getMessage(){
+        return measurementMessage;
     }
 }
