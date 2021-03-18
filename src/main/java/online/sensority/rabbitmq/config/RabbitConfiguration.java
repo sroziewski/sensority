@@ -20,7 +20,7 @@ public class RabbitConfiguration {
 
     @Bean
     public Queue myQueue() {
-        return new Queue(QUEUE_NAME, false);
+        return new Queue(QUEUE_NAME, true);
     }
 
     @Bean
@@ -67,19 +67,19 @@ public class RabbitConfiguration {
 //        return connectionFactory;
 //    }
 
-//    @Bean
-//    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-//                                             MessageListenerAdapter listenerAdapter) {
-//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-//        container.setConnectionFactory(connectionFactory);
-//        container.setQueueNames(QUEUE_NAME);
-//        container.setMessageListener(listenerAdapter);
-//        return container;
-//    }
-//
-//    @Bean
-//    MessageListenerAdapter listenerAdapter(MeasurementEventListener receiver) {
-//        return new MessageListenerAdapter(receiver, "receiveMessage");
-//    }
+    @Bean
+    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+                                             MessageListenerAdapter listenerAdapter) {
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.setQueueNames(QUEUE_NAME);
+        container.setMessageListener(listenerAdapter);
+        return container;
+    }
+
+    @Bean
+    MessageListenerAdapter listenerAdapter(MeasurementEventListener receiver) {
+        return new MessageListenerAdapter(receiver, "receiveMessage");
+    }
 
 }

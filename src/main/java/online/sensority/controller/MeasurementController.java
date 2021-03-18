@@ -1,7 +1,7 @@
 package online.sensority.controller;
 
 import online.sensority.model.Measurement;
-import online.sensority.model.MeasurementEvent;
+import online.sensority.model.MeasurementMessage;
 import online.sensority.service.MeasurementService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ public class MeasurementController {
     }
 
     @GetMapping(value = "/{id}/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    Flux<MeasurementEvent> streamMovieEvents(@PathVariable String id){
+    Flux<MeasurementMessage> streamMovieEvents(@PathVariable String id){
         return measurementService.events(id);
     }
 

@@ -2,7 +2,7 @@ package online.sensority.service;
 
 import online.sensority.event.MeasurementCreationEvent;
 import online.sensority.model.Measurement;
-import online.sensority.model.MeasurementEvent;
+import online.sensority.model.MeasurementMessage;
 import online.sensority.mongodb.repository.MeasurementMongoRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -26,14 +26,14 @@ public class MeasurementService {
         this.publisher = publisher;
     }
 
-    public Flux<MeasurementEvent> events(String id) {
-        return Flux.<MeasurementEvent>generate(movieEventSynchronousSink -> {
+    public Flux<MeasurementMessage> events(String id) {
+        return Flux.<MeasurementMessage>generate(movieEventSynchronousSink -> {
             String[] theatres = { "PVR", "Gopalan", "Rex", "Big Cinemas", "Multiplex", "Innovative", "Cinepolis" };
             int idx = new Random().nextInt(theatres.length);
             String random = (theatres[idx]);
-            MeasurementEvent measurementEvent =  new MeasurementEvent(id, random, new Date());
+            MeasurementMessage measurementMessage =  new MeasurementMessage(id, random, new Date());
 //            publishEvent(measurementEvent);
-            movieEventSynchronousSink.next(measurementEvent);
+            movieEventSynchronousSink.next(measurementMessage);
         }).delayElements(Duration.ofSeconds(5));
     }
 

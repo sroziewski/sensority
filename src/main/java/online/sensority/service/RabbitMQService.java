@@ -1,7 +1,7 @@
 package online.sensority.service;
 
 import lombok.extern.slf4j.Slf4j;
-import online.sensority.model.MeasurementEvent;
+import online.sensority.model.MeasurementMessage;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class RabbitMQService {
         int f = 1;
     }
 
-    public void sendMessage(MeasurementEvent measurementEvent) {
-        log.info("Sending message to queue: " + measurementEvent);
-        rabbitTemplate.convertAndSend(MESSAGE_QUEUE, measurementEvent);
+    public void sendMessage(MeasurementMessage measurementMessage) {
+        log.info("Sending message to queue: " + measurementMessage);
+        rabbitTemplate.convertAndSend(MESSAGE_QUEUE, measurementMessage);
     }
 }
