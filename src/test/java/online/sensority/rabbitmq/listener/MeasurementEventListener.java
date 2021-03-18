@@ -4,17 +4,20 @@ import online.sensority.model.MeasurementMessage;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Profile({"test"})
 public class MeasurementEventListener {
 
-    MeasurementMessage measurementMessage;
+    List<MeasurementMessage> messageList;
 
-    public void receiveMessage(MeasurementMessage message) {
-        measurementMessage = message;
+    public void receiveMessage(List<MeasurementMessage> message) {
+        messageList = message;
+        message.forEach(System.out::println);
     }
 
-    public MeasurementMessage getMessage(){
-        return measurementMessage;
+    public List<MeasurementMessage> getMessage(){
+        return messageList;
     }
 }

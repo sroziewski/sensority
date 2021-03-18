@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -21,8 +22,8 @@ public class RabbitMQService {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(MeasurementMessage measurementMessage) {
-        log.info("Sending message to queue: " + measurementMessage);
-        rabbitTemplate.convertAndSend(MESSAGE_QUEUE, measurementMessage);
+    public void sendMessage(List<MeasurementMessage> messageList) {
+        log.info("Sending message to queue: " + messageList);
+        rabbitTemplate.convertAndSend(MESSAGE_QUEUE, messageList);
     }
 }
