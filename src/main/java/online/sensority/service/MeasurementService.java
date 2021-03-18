@@ -2,16 +2,11 @@ package online.sensority.service;
 
 import online.sensority.event.MeasurementCreationEvent;
 import online.sensority.model.Measurement;
-import online.sensority.model.MeasurementMessage;
 import online.sensority.mongodb.repository.MeasurementMongoRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.time.Duration;
-import java.util.Date;
-import java.util.Random;
 
 @Service
 public class MeasurementService {
@@ -26,16 +21,16 @@ public class MeasurementService {
         this.publisher = publisher;
     }
 
-    public Flux<MeasurementMessage> events(String id) {
-        return Flux.<MeasurementMessage>generate(movieEventSynchronousSink -> {
-            String[] theatres = { "PVR", "Gopalan", "Rex", "Big Cinemas", "Multiplex", "Innovative", "Cinepolis" };
-            int idx = new Random().nextInt(theatres.length);
-            String random = (theatres[idx]);
-            MeasurementMessage measurementMessage =  new MeasurementMessage(id, random, new Date());
-//            publishEvent(measurementEvent);
-            movieEventSynchronousSink.next(measurementMessage);
-        }).delayElements(Duration.ofSeconds(5));
-    }
+//    public Flux<MeasurementMessage> events(String id) {
+//        return Flux.<MeasurementMessage>generate(movieEventSynchronousSink -> {
+//            String[] theatres = { "PVR", "Gopalan", "Rex", "Big Cinemas", "Multiplex", "Innovative", "Cinepolis" };
+//            int idx = new Random().nextInt(theatres.length);
+//            String random = (theatres[idx]);
+//            MeasurementMessage measurementMessage =  new MeasurementMessage(id, random, new Date());
+////            publishEvent(measurementEvent);
+//            movieEventSynchronousSink.next(measurementMessage);
+//        }).delayElements(Duration.ofSeconds(5));
+//    }
 
     public Mono<Measurement> getById(String id) {
         return measurementMongoRepository.findById(id);

@@ -22,7 +22,7 @@ public class MeasurementController {
 
     @GetMapping(value = "/{id}/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<MeasurementMessage> streamMovieEvents(@PathVariable String id){
-        return measurementService.events(id);
+        return null;
     }
 
     @GetMapping(value = "/{id}")
