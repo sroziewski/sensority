@@ -21,11 +21,6 @@ public class RabbitMQService {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @PostConstruct
-    public void abc(){
-        int f = 1;
-    }
-
     public void sendMessage(MeasurementMessage measurementMessage) {
         log.info("Sending message to queue: " + measurementMessage);
         rabbitTemplate.convertAndSend(MESSAGE_QUEUE, measurementMessage);

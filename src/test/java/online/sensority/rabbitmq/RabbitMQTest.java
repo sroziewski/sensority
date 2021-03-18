@@ -28,10 +28,10 @@ public class RabbitMQTest {
 
    @Test
     public void testSimplePutAndGet() throws InterruptedException {
-       MeasurementMessage testMessage = new MeasurementMessage(UUID.randomUUID().toString(), "Big Thing", new Date());
+       MeasurementMessage testMessage = MeasurementMessage.builder().ip(UUID.randomUUID().toString()).build();
        rabbitMQService.sendMessage(testMessage);
        Thread.sleep(1000);
        MeasurementMessage messageReceived = measurementEventListener.getMessage();
-       Assertions.assertEquals(testMessage.getMovieId(), messageReceived.getMovieId());
+       Assertions.assertEquals(testMessage.getIp(), messageReceived.getIp());
     }
 }
