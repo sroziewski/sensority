@@ -1,25 +1,12 @@
 spring:
   profiles:
     active: prod
-  rabbitmq:
-    host: 144.91.75.39
-    username: simon
-    password: 1qaz@WSX
-    port: 5672
-  template:
-    retry:
-      enabled: true
-      initial-interval: 2s
 
 destinations:
   queues:
     test:
       exchange: test
       routing-key: test
-
-test:
-  event:
-    queue: test-queue-name
 
 log4j:
   category:

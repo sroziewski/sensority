@@ -5,3 +5,16 @@ spring:
       host: 144.91.75.39
       password: 2wsx!QAZ
       port: 27018
+
+  rabbitmq:
+    host: 144.91.75.39
+    username: simon
+    password: 1qaz@WSX
+    port: 5672
+    template:
+      retry:
+        enabled: true
+        initial-interval: 2s
+
+measurement:
+  queue:  main-queue

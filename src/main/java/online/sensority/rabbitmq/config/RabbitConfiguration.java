@@ -2,17 +2,20 @@ package online.sensority.rabbitmq.config;
 
 import online.sensority.rabbitmq.listener.MeasurementEventListener;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class RabbitConfiguration {
 
-    @Value("${test.event.queue}")
+    @Value("${measurement.queue}")
     private String QUEUE_NAME;
 
     @Bean
@@ -31,6 +34,18 @@ public class RabbitConfiguration {
     }
 
 //    @Bean
+//    public RabbitAdmin amqpAdmin() {
+//        return new RabbitAdmin(connectionFactory());
+//    }
+//
+//    @Bean
+//    public RabbitTemplate rabbitTemplate() {
+//        return new RabbitTemplate(connectionFactory());
+//    }
+
+
+
+//    @Bean
 //    public SimpleRabbitListenerContainerFactory rabbitFactory(SimpleRabbitListenerContainerFactoryConfigurer configurer, ConnectionFactory connectionFactory) {
 //        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
 //        configurer.configure(factory, connectionFactory);
@@ -43,19 +58,28 @@ public class RabbitConfiguration {
 //        return factory;
 //    }
 
-    @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(QUEUE_NAME);
-        container.setMessageListener(listenerAdapter);
-        return container;
-    }
+//    @Bean
+//    public CachingConnectionFactory connectionFactory() {
+//        CachingConnectionFactory connectionFactory =
+//                new CachingConnectionFactory("localhost", 55293);
+//        connectionFactory.setUsername("guest");
+//        connectionFactory.setPassword("guest");
+//        return connectionFactory;
+//    }
 
-    @Bean
-    MessageListenerAdapter listenerAdapter(MeasurementEventListener receiver) {
-        return new MessageListenerAdapter(receiver, "receiveMessage");
-    }
+//    @Bean
+//    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+//                                             MessageListenerAdapter listenerAdapter) {
+//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+//        container.setConnectionFactory(connectionFactory);
+//        container.setQueueNames(QUEUE_NAME);
+//        container.setMessageListener(listenerAdapter);
+//        return container;
+//    }
+//
+//    @Bean
+//    MessageListenerAdapter listenerAdapter(MeasurementEventListener receiver) {
+//        return new MessageListenerAdapter(receiver, "receiveMessage");
+//    }
 
 }
