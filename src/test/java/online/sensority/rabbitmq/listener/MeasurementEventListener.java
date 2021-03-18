@@ -1,6 +1,7 @@
 package online.sensority.rabbitmq.listener;
 
 import online.sensority.model.MeasurementMessage;
+import online.sensority.model.RabbitMessage;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -10,14 +11,14 @@ import java.util.List;
 @Profile({"test"})
 public class MeasurementEventListener {
 
-    List<MeasurementMessage> messageList;
+    RabbitMessage messageList;
 
-    public void receiveMessage(List<MeasurementMessage> message) {
+    public void receiveMessage(RabbitMessage message) {
         messageList = message;
-        message.forEach(System.out::println);
+        message.getPayload().forEach(System.out::println);
     }
 
-    public List<MeasurementMessage> getMessage(){
+    public RabbitMessage getMessage(){
         return messageList;
     }
 }

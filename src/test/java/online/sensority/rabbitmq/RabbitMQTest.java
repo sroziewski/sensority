@@ -1,6 +1,7 @@
 package online.sensority.rabbitmq;
 
 import online.sensority.model.MeasurementMessage;
+import online.sensority.model.RabbitMessage;
 import online.sensority.rabbitmq.listener.MeasurementEventListener;
 import online.sensority.service.RabbitMQService;
 import org.junit.jupiter.api.Assertions;
@@ -33,20 +34,23 @@ public class RabbitMQTest {
 
    @Test
     public void testSimplePutAndGet() throws InterruptedException {
-       List<MeasurementMessage> sendingMessage = createTestMessage();
+       RabbitMessage sendingMessage = createTestMessage();
        rabbitMQService.sendMessage(sendingMessage);
        Thread.sleep(1000);
-       List<MeasurementMessage> messageReceived = measurementEventListener.getMessage();
+       RabbitMessage messageReceived = measurementEventListener.getMessage();
        Assertions.assertEquals(sendingMessage, messageReceived);
     }
 
-    private String createJsonTestMessage() throws JsonProcessingException {
+    @Test
+    public void createJsonTestMessage() throws JsonProcessingException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        return ow.writeValueAsString(createTestMessage());
+        String str = ow.writeValueAsString(createTestMessage()).replaceAll("\\s+", "");
+        int i=1;
     }
 
-    private List<MeasurementMessage> createTestMessage() {
-        return IntStream.range(0, 50)
+    private RabbitMessage createTestMessage() {
+        return new RabbitMessage(QUEUE_NAME,
+            IntStream.range(0, 50)
                 .boxed()
                 .map(i -> MeasurementMessage.builder()
                         .temperature(101.2 + i)
@@ -57,6 +61,7 @@ public class RabbitMQTest {
                         .voltage(0.5 + i)
                         .timestamp(new Timestamp(System.currentTimeMillis()))
                         .build())
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toUnmodifiableList())
+        );
     }
 }

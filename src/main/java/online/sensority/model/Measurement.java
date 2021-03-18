@@ -1,17 +1,25 @@
 package online.sensority.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "{#mongoConfihuration.getCollectionName()}")
+@Builder
+@Document
 public class Measurement {
-
-    private String id;
-
-    @NonNull
-    private String title;
+    private String sensorId;
+    private String ip;
+    private Double temperature;
+    private Double pressure;
+    private Double humidity;
+    private Double voltage;
+    private Timestamp timestamp;
 }
-

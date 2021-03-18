@@ -5,6 +5,4 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Mono;
 
 public interface MeasurementMongoRepository extends ReactiveMongoRepository<Measurement, String> {
-
-    Mono<Measurement> findFirstByTitle(String title);
 }

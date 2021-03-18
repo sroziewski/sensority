@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 public class MeasurementMessage implements Serializable {
-    private static final long serialVersionUID = -4981161628784858616L;
+    private static final long serialVersionUID = -2981161128784318610L;
 
     private String sensorId;
     private String ip;

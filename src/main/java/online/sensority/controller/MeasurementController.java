@@ -1,6 +1,6 @@
 package online.sensority.controller;
 
-import online.sensority.model.Measurement;
+import online.sensority.model.RabbitMessage;
 import online.sensority.model.MeasurementMessage;
 import online.sensority.service.MeasurementService;
 import org.springframework.http.MediaType;
@@ -26,12 +26,12 @@ public class MeasurementController {
     }
 
     @GetMapping(value = "/{id}")
-    Mono<Measurement> getMovieById(@PathVariable String id){
-        return measurementService.getById(id);
+    Mono<RabbitMessage> getMovieById(@PathVariable String id){
+        return null;
     }
 
     @GetMapping
-    Flux<Measurement> getAllMovies(){
-        return measurementService.getAll();
+    Flux<RabbitMessage> getAllMovies(){
+        return null;
     }
 }
